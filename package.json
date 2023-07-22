@@ -1,0 +1,11 @@
+{
+  "name": "frontend-note",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "exec": "node scripts/exec-script.js"
+  },
+  "author": "ming",
+  "license": "ISC"
+}
