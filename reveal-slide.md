@@ -102,7 +102,7 @@ Git is a free and open source `distributed version control system`{style=color:y
 ### Nodejs
 
 :::block{style=text-align:left;}
-Node.js® is an open-source, cross-platform `JavaScript runtime environment`{style=color:yellow}.
+Node.js® is a `JavaScript runtime`{style=color:yellow} built on Chrome’s V8 `JavaScript engine`{style=color:yellow}.
 :::
 
 > The runtime environment is the environment in which a program or application is executed.{style=width:100%}
@@ -133,7 +133,7 @@ ex: V8, SpiderMonkey
 > The runtime provides `the host objects`{style=color:yellow} that JavaScript can operate on and work with.
 {style=width:100%}
 - Nodejs: path, filesystem
-- Chrome: document, window
+- Browser: DOM(Document Object Model)
 :::
 
 ---
@@ -234,17 +234,18 @@ The specification defined in ECMA-262 for creating a general purpose scripting l
 
 ### JavaScript
 
-- Data Types
-- Operators
-- Dynamic Typing
-- prototype-based
-- object-orientation
-- first-class functions
-
+1. Data Types
+2. Build-in Objects
+3. Function
+4. Synchronous & Asynchronous
+5. Promise
 
 ---
 
-### Data Types
+### [Data Types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
+
+<div style="display:grid;grid-template-columns:repeat(2,1fr)">
+<div>
 
 - String
 - Number
@@ -253,18 +254,62 @@ The specification defined in ECMA-262 for creating a general purpose scripting l
 - Undefined
 - Null
 - Symbol
-- Object(array, object...)
 
+</div>
+<div>
+
+- Object
+  - Call by sharing
+  - Immutable
+  <!-- - Destructuring assignment -->
+
+</div>
+</div>
 
 ---
 
-![null undefined](./images/null-undeined.png)
+### [Build-in Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
+
+> The term "global objects" (or standard built-in objects) here is not to be confused with the global object. Here, "global objects" refer to objects in the `global scope`{style=color:yellow}.{style=width:100%}
+
+- Prototype-based
 
 ---
 
+### Function
 
-<!-- .slide: style="text-align: left;" -->
+1. [First-class Function](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function)
+
+    - Assigning a function to a variable
+    - Passing a function as an argument
+    - Returning a function
+
+2. Arrow Function
+3. [Currying](https://javascript.info/currying-partials)
+4. Callback Function
+
+---
+
+### Synchronous & Asynchronous
+
+> Blocking methods execute synchronously and non-blocking methods execute asynchronously.{style=width:100%}
+
+- Single thread
+- [Event loop](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
+---
+
+### [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+- states
+    - pending: initial state, neither fulfilled nor rejected.
+    - fulfilled: meaning that the operation was completed successfully.
+    - rejected: meaning that the operation failed.
+- prototype
+    - [then()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+    - [catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+    - [finally()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally)
+
+---
+
 # THE END
-
-- [Try the online editor](http://slides.com)
-- [Source code & documentation](https://github.com/hakimel/reveal.js)

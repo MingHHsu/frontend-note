@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div>被阻塞的範例</div>
+  </body>
+  <script>
+    var delay = 5000; // 凍結 5 秒
+    var end = +new Date() + delay;
+    console.log('delay start');
+    while(new Date() < end) {
+
+    }
+    console.log('delay end');
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://jsonplaceholder.typicode.com/users/1', true);
+      
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        // console.log(this.response);
+      }
+    };
+      
+    request.send();
+
+  </script>
+</html>

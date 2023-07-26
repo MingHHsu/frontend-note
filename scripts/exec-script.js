@@ -1,8 +1,13 @@
+import fs from 'fs';
+import path, { dirname } from 'path';
+import { exec } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const [_pathToNode, _pathToScript, ...args] = process.argv;
 const [key] = args;
-
-const path = require('path');
-const fs = require('fs');
 
 const rootPath = path.join(__dirname, '..');
 const problemsPath = path.join(rootPath, 'problems');
@@ -18,8 +23,9 @@ filenames.forEach(function (file) {
 const filePath = fileMap?.get(key);
 const targetPath = path.join(problemsPath, filePath);
 
-const { exec } = require('child_process');
-
 exec(`node ${targetPath}/main.js`, (err, stdout, stderr) => {
+  if (err) {
+    console.log(stderr);
+  }
   console.log(stdout);
 });
