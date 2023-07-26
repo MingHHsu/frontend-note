@@ -216,6 +216,9 @@ The specification defined in ECMA-262 for creating a general purpose scripting l
 </div>
 <div>
 
+- Git GUI
+  - Sourcetree
+
 - IDE
   - VSCode
 
@@ -272,7 +275,7 @@ The specification defined in ECMA-262 for creating a general purpose scripting l
 
 > The term "global objects" (or standard built-in objects) here is not to be confused with the global object. Here, "global objects" refer to objects in the `global scope`{style=color:yellow}.{style=width:100%}
 
-- Prototype-based
+- [Prototype-based](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
 
 ---
 

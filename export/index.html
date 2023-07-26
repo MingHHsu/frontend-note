@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Frontend Note</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/night.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <h1>Frontend Note</h1>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Contents</h3>
+<div class="block">
+<ul>
+<li>Shell</li>
+<li>Command Line Interface(CLI)</li>
+<li>Git</li>
+<li>Nodejs</li>
+<li>JavaScript Engine &amp; Runtime</li>
+<li>Runtime API</li>
+<li>ECMAScript</li>
+<li style="color:yellow">Coding Time</li>
+<li>JavaScript</li>
+</ul>
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Shell</h3>
+<div style="text-align:left;font-size:36px" class="block">
+<p>In computing, a shell is a computer program that exposes an operating system’s services to a human user or other programs.<br /></p>
+<p>In general, operating system shells use either a <code style="color:yellow">command-line interface (CLI)</code> or <code style="color:yellow">graphical user interface (GUI)</code>, depending on a computer’s role and particular operation.<br /></p>
+<!-- It is named a shell because it is the outermost layer around the operating system.<br /> -->
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Shell</h3>
+<ul>
+<li>
+<p>Windows OS: CMD, PowerShell, Git Bash</p>
+</li>
+<li>
+<p>MacOS: Bash, Zsh</p>
+</li>
+</ul>
+<div class="">
+<div style="display: grid; grid-template-columns: repeat(2, 1fr)">
+<p><img src="./images/echo-shell-git-bash.jpeg" alt="image info" width="100%"></p>
+<p><img src="./images/echo-shell-zsh.png" alt="image info"></p>
+</div></div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Command Line Interface (CLI)</h3>
+<div style="text-align:left;" class="block">
+<p>CLI is a means of interacting with a device or computer program with commands from a user or client.</p>
+<p><img src="./images/command-line.png" alt="image info"></p>
+<div style="text-align:left" class="block">
+<ul>
+<li>shell (cd, cat, echo…)</li>
+<li>package (brew, git, node…)</li>
+</ul>
+</div>
+<!-- 
+---
+
+### Zsh
+
+::: block{style=text-align:left;}
+Zsh is a shell designed for interactive use, although it is also a powerful `scripting language`{style=color:yellow}. Many of the useful features of bash, ksh, and tcsh were incorporated into zsh; many original features were added.
+
+> A scripting language is one that is well suited to writing programs which are more like a long list of commands. {style=width:100%}
+
+- [oh my zsh](https://github.com/ohmyzsh/ohmyzsh)
+:::
+--></div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Git</h3>
+<div style="text-align:left" class="block">
+<p>Git is a free and open source <code style="color:yellow">distributed version control system</code> designed to handle everything from small to very large projects with speed and efficiency.</p>
+<ul>
+<li>Github</li>
+<li>Git Flow</li>
+</ul>
+<p><a href="https://learngitbranching.js.org/">learn git branching</a></p>
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Nodejs</h3>
+<div style="text-align:left;" class="block">
+<p>Node.js® is a <code style="color:yellow">JavaScript runtime</code> built on Chrome’s V8 <code style="color:yellow">JavaScript engine</code>.</p>
+</div>
+<blockquote style="width:100%">
+<p>The runtime environment is the environment in which a program or application is executed.</p>
+</blockquote>
+<div style="text-align:left;" class="block">
+<p>npm (Node Package Manager)</p>
+<ul>
+<li>the website</li>
+<li>the CLI</li>
+<li>the registry</li>
+</ul>
+<p><a href="https://nodeschool.io/">Node School</a></p>
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>JavaScript Engine &amp; Runtime</h3>
+<h5><code style="color:yellow">engine</code></h5>
+<div style="text-align:left" class="block">
+<blockquote style="width:100%">
+<p>A program or interpreter that understands and executes JavaScript code.</p>
+</blockquote>
+<p>ex: V8, SpiderMonkey</p>
+</div>
+<h5><code style="color:yellow">runtime</code></h5>
+<div style="text-align:left" class="block">
+<blockquote style="width:100%">
+<p>The runtime provides <code style="color:yellow">the host objects</code> that JavaScript can operate on and work with.</p>
+</blockquote>
+<ul>
+<li>Nodejs: path, filesystem</li>
+<li>Browser: DOM(Document Object Model)</li>
+</ul>
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Runtime API</h3>
+<blockquote style="width:100%">
+<p>APIs are mechanisms that enable two software components to communicate with each other using a set of definitions and protocols.</p>
+</blockquote>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr)">
+<div>
+<p><a href="https://nodejs.org/api/">Nodejs API</a></p>
+<ul>
+<li>
+<p><a href="https://nodejs.org/api/console.html#consolelogdata-args">console.log</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.org/dist/latest-v20.x/docs/api/timers.html#settimeoutcallback-delay-args">setTimeout</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.org/dist/latest-v20.x/docs/api/path.html#pathrelativefrom-to">path.relative</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.org/api/fs.html#fswritefd-buffer-offset-length-position-callback">fs.write</a></p>
+</li>
+</ul>
+</div>
+<div>
+<p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API">Web API</a></p>
+<ul>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/log">console.log</a></p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/setTimeout">setTimeout</a></p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">window.open</a></p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">document.createElement</a></p>
+</li>
+</ul>
+</div>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><img src="./images/engine-runtime-ecma.png" alt="engine and runtime"></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>ECMAScript</h3>
+<div style="text-align:left" class="block">
+<p>The specification defined in ECMA-262 for creating a general purpose scripting language.</p>
+<ul>
+<li><a href="https://www.javatpoint.com/es5-vs-es6">ES5 vs ES6(ES2015)</a></li>
+</ul>
+</div>
+<br />
+<h5 style="text-align:left">Babel</h5>
+<blockquote style="width:100%">
+<p>A transpiler that can convert ES6 code to ES5 code.</p>
+</blockquote>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Coding Time</h3>
+<div style="text-align:left" class="block">
+<h5>requirements</h5>
+<div style="display: flex">
+<div>
+<ul>
+<li>Shell
+<ul>
+<li>MacOS: Zsh or Bash</li>
+<li>WindowsOS: Git Bash</li>
+</ul>
+</li>
+<li>Git
+<ul>
+<li><code style="color:yellow">git -v</code></li>
+</ul>
+</li>
+<li>Node
+<ul>
+<li><code style="color:yellow">node -v</code></li>
+<li><code style="color:yellow">npm -v</code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<p>Git GUI</p>
+<ul>
+<li>Sourcetree</li>
+</ul>
+</li>
+<li>
+<p>IDE</p>
+<ul>
+<li>VSCode</li>
+</ul>
+</li>
+<li>
+<p>repository</p>
+<ul>
+<li>
+<p><a href="https://github.com/MingHHsu/frontend-note.git">git clone</a></p>
+</li>
+<li>
+<p>code frontend-note</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>JavaScript</h3>
+<ol>
+<li>Data Types</li>
+<li>Build-in Objects</li>
+<li>Function</li>
+<li>Synchronous &amp; Asynchronous</li>
+<li>Promise</li>
+</ol>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">Data Types</a></h3>
+<div style="display:grid;grid-template-columns:repeat(2,1fr)">
+<div>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Bigint</li>
+<li>Boolean</li>
+<li>Undefined</li>
+<li>Null</li>
+<li>Symbol</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>Object
+<ul>
+<li>Call by sharing</li>
+<li>Immutable</li>
+</ul>
+<!-- - Destructuring assignment -->
+</li>
+</ul>
+</div>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">Build-in Objects</a></h3>
+<blockquote style="width:100%">
+<p>The term “global objects” (or standard built-in objects) here is not to be confused with the global object. Here, “global objects” refer to objects in the <code style="color:yellow">global scope</code>.</p>
+</blockquote>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes">Prototype-based</a></li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Function</h3>
+<ol>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function">First-class Function</a></p>
+<ul>
+<li>Assigning a function to a variable</li>
+<li>Passing a function as an argument</li>
+<li>Returning a function</li>
+</ul>
+</li>
+<li>
+<p>Arrow Function</p>
+</li>
+<li>
+<p><a href="https://javascript.info/currying-partials">Currying</a></p>
+</li>
+<li>
+<p>Callback Function</p>
+</li>
+</ol>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Synchronous &amp; Asynchronous</h3>
+<blockquote style="width:100%">
+<p>Blocking methods execute synchronously and non-blocking methods execute asynchronously.</p>
+</blockquote>
+<ul>
+<li>Single thread</li>
+<li><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">Event loop</a></li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></h3>
+<ul>
+<li>states
+<ul>
+<li>pending: initial state, neither fulfilled nor rejected.</li>
+<li>fulfilled: meaning that the operation was completed successfully.</li>
+<li>rejected: meaning that the operation failed.</li>
+</ul>
+</li>
+<li>prototype
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">then()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">catch()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally">finally()</a></li>
+</ul>
+</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>THE END</h1>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 700,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+      chalkboard: { // font-awesome.min.css must be available
+        //src: "chalkboard/chalkboard.json",
+        storage: "chalkboard-demo",
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+      {
+        icon: '<i class="fa fa-pen-square"></i>',
+        title: 'Toggle chalkboard (B)',
+        action: 'RevealChalkboard.toggleChalkboard();'
+      },
+      {
+        icon: '<i class="fa fa-pen"></i>',
+        title: 'Toggle notes canvas (C)',
+        action: 'RevealChalkboard.toggleNotesCanvas();'
+      }
+      
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>
