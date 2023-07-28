@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "esnext", // 或其他你要支援的 ECMAScript 版本
+        "module": "esnext", // 或其他模組系統 (如 "es6", "amd" 等)
+        "outDir": "./dist", // 編譯輸出目錄
+        "strict": true // 開啟嚴格模式檢查 (可選)
+    },
+    "include": [
+        "problems"
+    ], // TypeScript 檔案的來源目錄
+    "exclude": [
+        "node_modules"
+    ] // 排除編譯的目錄
+}

@@ -28,12 +28,13 @@ function swap(a, b) {
   var tmp = a;
   a = b;
   b = tmp;
+  return {a, b}
 }
 
 var x = 10;
 var y = 20;
-swap(x, y);
-console.log(x, y);
+const vv = swap(x, y);
+console.log(vv.a, vv.b);
 
 console.log('\n');
 

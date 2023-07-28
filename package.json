@@ -8,5 +8,9 @@
     "exec": "node scripts/exec-script.js"
   },
   "author": "ming",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "typescript": "^5.1.6"
+  }
 }

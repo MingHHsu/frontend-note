@@ -14,6 +14,7 @@ fs.readFile(`${dirname}/reveal-slide.md`, (err, data) => {
     console.log(err)
   } else {
     console.log('readFile: ', data)
+    fs.readFile(`${dirname}/reveal-slide.md`, )
   }
 });
 
