@@ -63,10 +63,46 @@ const targetPath = path.join(problemsPath, filePath);
 // run1()
 
 
+function compileTsFile() {
+  return new Promise((resolve, reject) => {
+    exec(`npx tsc`, (err, stdout, stderr) => {
+      if (err) {
+        console.log(stderr);
+        reject();
+      }
+      console.log(stdout);
+      resolve();
+    });
+  });
+}
 
+function execTsFile() {
+  return new Promise((resolve, reject) => {
+    exec(`node ./dist/main.js`, (err, stdout, stderr) => {
+      if (err) {
+        console.log(stderr);
+        reject();
+      }
+      console.log(stdout);
+      resolve();
+    });
+  })
+}
 
+async function main() {
+  try {
+    await compileTsFile();
+    await execTsFile();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+main();
 
 async function run2() {
+
+
 
   const commands = [
     { condition: filePath === 'p8-practice', command: `npx tsc` },
@@ -115,21 +151,7 @@ async function run2() {
 
 }
 
-run2()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// run2()
 
 async function runCommands() {
 

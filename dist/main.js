@@ -12,7 +12,7 @@ class Person {
     }
 }
 // 創建 Person 物件實例
-const person1 = new Person('John', 51);
+const person1 = new Person('John', 66);
 person1.sayHello();
 // directly create person2
 const person2 = {
