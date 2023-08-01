@@ -1,19 +1,25 @@
-"use strict";
+
+
 // define person and create person1
 class Person {
-    name;
-    age;
-    constructor(name, age) {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
         this.name = name;
         this.age = age;
     }
+
     sayHello() {
         console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
     }
 }
+
 // 創建 Person 物件實例
-const person1 = new Person('John', 66);
+const person1 = new Person('John', 50);
 person1.sayHello();
+
+
 // directly create person2
 const person2 = {
     name: 'Jane',
@@ -22,4 +28,5 @@ const person2 = {
         console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
     }
 };
+
 person2.sayHello();
