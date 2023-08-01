@@ -23,11 +23,3 @@ const result = readFile(`${dirname}/reveal-slide.md`, (err, data) => {
 }).catch(err => {
   console.log(err)
 })
-console.log(11111, await result);
-
-// const arr = [];
-// for (let i = 2; i <= 99999999; i += 2) {
-//   arr.push(i);
-// }
-
-// console.log(arr);
