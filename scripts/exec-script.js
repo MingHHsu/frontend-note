@@ -42,7 +42,7 @@ async function main() {
 
     if (filePath.endsWith('-ts')) {
       await execPromiseCommand(`npx tsc`);
-      await execPromiseCommand(`node ./dist/main.js`);
+      await execPromiseCommand(`node ./dist/${filePath}/main.js`);
     } else {
       await execPromiseCommand(`node ${targetPath}/main.js`);
     }
