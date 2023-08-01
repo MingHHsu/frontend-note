@@ -1,0 +1,1 @@
+console.log(`this is console.log printed by a js file compile from ts`);

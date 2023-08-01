@@ -36,10 +36,15 @@ const arr = [1, 2, 3].map((item) => item * 2);
  */
 function customMap(array, callback) {
   const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    newArray.push(callback(array[i]));
+  }
   return newArray;
 }
 
-const newArr = customMap([1, 2, 3], (item) => item * 2);
+const newArr = customMap([1, 2, 3], (item) => {
+  return item * 2
+});
 
 console.log('arr: ', arr);
 console.log('newArr: ', newArr);
@@ -52,17 +57,29 @@ function returnFunction() {
   };
 };
 
-const curryFunc = (args) => (callback) => {
-  return callback(args[0], args[1]);
+const curryFunc = (args) => {
+  return (callback) => {
+    return callback(args[0], args[1]);
+  }
 };
 
 const curriedFunc = curryFunc([1, 2]);
-let plus;
-let minus;
-let multiply;
-let divide;
+let plus = (a, b) => {
+  return  a+b 
+};
+let minus = (a,b) => {
+  return a-b
+};
+let multiply = (a, b) => {
+  return a*b
+};
+let divide = (a,b) => {
+  return a/b
+};
 
-console.log('plus: ', plus);
-console.log('minus: ', minus);
-console.log('multiply: ', multiply);
-console.log('divide: ', divide);
+console.log('plus: ', curryFunc([1,2])(plus));
+console.log('minus: ',  curryFunc([1,2])(minus));
+console.log('multiply: ',  curryFunc([1,2])(multiply));
+console.log('divide: ', curryFunc([1,2])(divide));
+
+
