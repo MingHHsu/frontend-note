@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Exercise</title>
   </head>
   <body>
@@ -62,7 +63,7 @@
           </ul>
         </li>
       </ul>
-      
+
     </block>
     <div id="root"></div>
   </body>
@@ -149,14 +150,29 @@
 
     function main() {
       const root = document.getElementById('root');
-      const game = createElement(
-        // start
-        // end
-      );
+      const game = document.createElement('div');
+      game.className = 'game'
+      const gameGrid = gridCreater(3, 3);
       root.appendChild(game);
+      game.appendChild(gameGrid);
     }
-  
-    main();
+
+    function gridCreater(rows, columns) {
+      let div = document.createElement('div');
+      div.className = 'game-table';
+
+      for (let i = 0; i < rows * columns; i++) {
+          let cell = document.createElement('div');
+          cell.id = 'square-' + i;
+          cell.className = 'square';
+          div.appendChild(cell);
+      }
+
+      return div;
+    }
+
+main();
+
   </script>
   <style>
     /* start */
