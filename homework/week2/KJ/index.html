@@ -165,6 +165,9 @@
           let cell = document.createElement('div');
           cell.id = 'square-' + i;
           cell.className = 'square';
+          cell.addEventListener('click', () => {
+            console.log('按了第', i, '格');
+          });
           div.appendChild(cell);
       }
 
