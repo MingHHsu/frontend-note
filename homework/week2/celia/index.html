@@ -65,6 +65,7 @@
       
     </block>
     <div id="root"></div>
+
   </body>
   <script type="application/javascript">
     const players = ['O', 'X'];
@@ -104,12 +105,14 @@
             break;
         }
       });
-      children.forEach((child) => {
-        const childElement = typeof child === 'string'
-          ? document.createTextNode(child) //If string->create a text node（元素和屬性的文字內容）
-          : child; //如果是element->直接使用
-        element.appendChild(childElement);
-      });
+      if (children.length > 0) { //偷加
+        children.forEach((child) => {
+          const childElement = typeof child === 'string'
+            ? document.createTextNode(child) //If string->create a text node（元素和屬性的文字內容）
+            : child; //如果是element->直接使用
+          element.appendChild(childElement);
+        });
+      }
       return element;
     }
 
@@ -120,7 +123,6 @@
 
     function setNineSquares(newSquares) {
       // start
-      //createElement(div,['class','board']);
       // end
     }
 
@@ -150,22 +152,43 @@
 
     function main() {
       const root = document.getElementById('root');
+      /*
       const game = createElement(
         // start
+        'div', {'className':'board'}, squares.map(((value, index) => {
+          const childElement = createElement('div',{id: 'square-'+index, 'className': 'square', 'onClick': () => {console.log('click: ', index);}});
+          return childElement;
+        }))
         // end
       );
       root.appendChild(game);
+      */
+      const element = createElement('div',{'className':'board'});
+      console.log('div');
+      squares.map(((value, index) => {
+        const childElement = createElement('div',{id: 'square-'+index, 'className': 'square', 'onClick': () => {console.log('click: ', index);}});
+        element.appendChild(childElement);
+      }))
+      root.appendChild(element);
     }
   
     main();
   </script>
   <style>
     /* start */
-    #board {
-      border-width: 2px;
+    .board{
+      /*border-width: 2px;*/
       display: grid;
       grid-template-columns: 50px 50px 50px;
       grid-template-rows: 50px 50px 50px;
+    }
+    .square{
+      display: grid; /*flex*/
+      border-style: solid;
+      border-width: 2px;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
     }
     /* end */
   </style>
