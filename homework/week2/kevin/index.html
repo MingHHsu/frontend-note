@@ -61,28 +61,19 @@
             </li>
           </ul>
         </li>
+
+        <li>
+          <strong>TODO</strong>
+          <ul>
+            <li>點太多框框格式會跑掉</li>
+            <li>OX的css</li>
+          </ul>
+        </li>
       </ul>
       
     </block>
     <div id="root">
-        <div class="game">
-            <div class="game-board">
-                <div id="square-0" class="square"></div>
-                <div id="square-1" class="square"></div>
-                <div id="square-2" class="square"></div>
-                <div id="square-3" class="square"></div>
-                <div id="square-4" class="square"></div>
-                <div id="square-5" class="square"></div>
-                <div id="square-6" class="square"></div>
-                <div id="square-7" class="square"></div>
-                <div id="square-8" class="square"></div>
-            </div>
-            <div class="game-info">
-                <div id="current-player">Current Player: X</div>
-                <ul id="hostory-list"></ul>
-                <button>Reset</button>
-            </div>
-        </div>
+        
     </div>
   </body>
   <script type="application/javascript">
@@ -134,42 +125,96 @@
 
     function setHistoryList(newHistory) {
       // start
+        //後端history新增
+        history.push({'index':newHistory, 'player':currentPlayer});
+        currentPlayer = players[history.length % 2];
+        //前端顯示
+        const hist = document.getElementById('history-list');
+        hist.innerHTML += `<li>${history[history.length-1].player} : ${newHistory}</li>`;
       // end
     }
 
     function setNineSquares(newSquares) {
       // start
+      squares[newSquares] = currentPlayer;
       // end
     }
 
     function setCurrentPlayer(player) {
       // start
+      const p = document.getElementById('current-player');
+      p.innerText = "Current Player: " +currentPlayer;
       // end
     }
 
     function calculateWinner() {
       let winner = null;
-
       // start
-      // end
+      // 檢查水平相同
+      for (let i = 0; i < 9; i += 3) {
+        if (squares[i] === squares[i + 1] && squares[i] === squares[i + 2] && squares[i] !== null) {
+          winner = squares[i];
+          break;
+        }
+      }
+      // 檢查垂直相同
+      for (let i = 0; i < 3; i++) {
+        if (squares[i] === squares[i + 3] && squares[i] === squares[i + 6] && squares[i] !== null) {
+          winner = squares[i];
+          break;
+        }
+      }
 
+      // 檢查左上至右下對角線相同
+      if (squares[0] === squares[4] && squares[0] === squares[8] && squares[0] !== null) {
+        winner = squares[0];
+      }
+      // 檢查左下至右上對角線相同
+      if (squares[2] === squares[4] && squares[2] === squares[6] && squares[2] !== null) {
+        winner = squares[2];
+      }
+      if(winner!=null){
+        alert("The winner is "+ winner);
+      }
+      else if (winner==null && !squares.includes(null)){
+        alert("Draw, reset the game");
+        handleReset();
+      }
+
+      // end
       return winner;
     }
 
     function handleClick(index, event) {
       // start
-      const cells = document.querySelectorAll(".square");
+        console.log("現在點擊的是", index);
+        const cell = document.getElementById(index);
+        if(squares[index.substring(7)]!=null){
+          return;
+        }
+        cell.textContent = currentPlayer;
 
-      cells.forEach(cell =>{
-        cell.addEventListener("click",function(){
-            console.log('click: ', cell.id);
-        })
-      })
+        const indexN = index.substring(7); // 第幾個square
+        // 每次點擊 -> 修改squares內容、新增到頁面上、讓history加一筆、跳一次CurrentPlayer、計算遊戲有沒有結束
+        setNineSquares(indexN);
+        setHistoryList(index);
+        setCurrentPlayer(history.length);
+        calculateWinner();
       // end
     }
 
     function handleReset() {
       // start
+      squares = [null, null, null, null, null, null, null, null, null];
+      history = [];
+      currentPlayer = players[0];
+      setCurrentPlayer(currentPlayer);
+      console.log(currentPlayer);
+      gameover = false;
+      cells = document.querySelectorAll('div.square').forEach((cell) => {
+        cell.textContent = null;
+      })
+      document.getElementById('history-list').innerHTML = "";
       // end
     }
 
@@ -177,8 +222,29 @@
       const root = document.getElementById('root');
       const game = createElement(
         // start
+        // 最外層的game
+        'div', {'className':'game'},
+            //game 包的第一個, game-board 
+            createElement('div', {'className':'game-board'}, 
+                //問chatGPT寫出來的。事件發生時，DOM會建立event物件，內有多種屬性(像是target)
+                createElement('div', {'id':'square-0', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-1', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-2', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-3', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-4', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-5', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-6', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-7', 'className':'square', 'onClick':(event) => handleClick(event.target.id)}),
+                createElement('div', {'id':'square-8', 'className':'square', 'onClick':(event) => handleClick(event.target.id)})
+            ),
+            //game 包的第二個, game-info
+            createElement('div', {'className':'game-info'}, 
+                createElement('div', {'id':'current-player'}),
+                createElement('ul', {'id':'history-list'}),
+                createElement('button',{'onClick':handleReset},"Reset")
+            )
+        )
         // end
-      );
       root.appendChild(game);
     }
   
@@ -193,7 +259,7 @@
     .game-board{
         display: grid;
         grid-template-columns: 33% 33% 33%;
-        grid-template-rows: : 33% 33% 33%;
+        grid-template-rows: 33% 33% 33%;
     }
     .square{
         display: flex;
@@ -201,6 +267,7 @@
         border-width: 2px;
         width: 50px;
         height: 50px;
+        cursor: pointer;
     }
     /* end */
   </style>
