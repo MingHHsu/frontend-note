@@ -65,7 +65,10 @@
       </ul>
 
     </block>
-    <div id="root"></div>
+    <div class="game-container">
+      <div id="root"></div>
+      <div id="history-list"></div>
+    </div>
   </body>
   <script type="application/javascript">
     const players = ['O', 'X'];
@@ -86,7 +89,7 @@
     // index 就是格子的 index，player 就是 'O' 或 'X'
     let history = [];
     // currentPlayer 表示目前要選擇的玩家
-    let currentPlayer = players[history.length % 2];
+    let currentPlayer = players[0];
     // gameover 是一個 boolean 值，判斷遊戲是否結束
     let gameover = false;
 
@@ -115,8 +118,18 @@
     }
 
     function setHistoryList(newHistory) {
-      // start
-      // end
+      const historyElement = document.getElementById('history-list');
+
+      while (historyElement.firstChild) {
+        historyElement.removeChild(historyElement.firstChild);
+      }
+
+      newHistory.forEach((historyItem, theMove) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `第 ${theMove + 1} 回合: ${historyItem.player} 被置放在第 ${historyItem.square} 格`;
+
+        historyElement.appendChild(listItem);
+      });
     }
 
     function setNineSquares(newSquares) {
@@ -139,8 +152,7 @@
     }
 
     function setCurrentPlayer(player) {
-      // start
-      // end
+      currentPlayer = player;
     }
 
     function calculateWinner() {
@@ -170,28 +182,41 @@
         return;
       }
 
-      squares = squares.slice();
-      squares[index] = currentPlayer;
+      let newSquares = [...squares];
+      newSquares[index] = currentPlayer;
+      squares = newSquares;
+
       setNineSquares(squares);
+
+      history = [...history, {
+        squares: squares,
+        player: currentPlayer,
+        square: index
+      }];
+
+      setHistoryList(history);
+
+      currentPlayer = players[(history.length) % 2];
+      setCurrentPlayer(currentPlayer);
 
       const winner = calculateWinner();
       if (winner !== null) {
         gameover = true;
+        window.alert("Ｂ嘴！" + winner + " 贏了拉！");
+      } else if (!squares.includes(null)) {
+        window.alert("人生如戲，此次平手咱兩不相欠。");
       }
-
-      currentPlayer = players[(history.length + 1) % 2];
-
-      history = history.concat([{
-        squares: squares,
-        player: currentPlayer,
-      }]);
-
-      console.log(setNineSquares(squares));
     }
 
     function handleReset() {
-      // start
-      // end
+      squares = [null, null, null, null, null, null, null, null, null];
+      history = [];
+      setCurrentPlayer(players[0]);
+      gameover = false;
+
+      setNineSquares(squares);
+      setHistoryList(history);
+
     }
 
     function main() {
@@ -199,8 +224,13 @@
       const game = document.createElement('div');
       game.className = 'game'
       const gameGrid = gridCreater(3, 3);
-      root.appendChild(game);
       game.appendChild(gameGrid);
+      const resetBotton = createElement('button', {onClick: () => handleReset()}, 'Reset that Damn Board');
+      game.appendChild(resetBotton);
+      root.appendChild(game);
+      setNineSquares(squares);
+      setHistoryList(history);
+
     }
 
     function gridCreater(rows, columns) {
@@ -216,7 +246,6 @@
           });
           div.appendChild(cell);
       }
-
       return div;
     }
 
