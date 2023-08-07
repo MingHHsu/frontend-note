@@ -120,8 +120,22 @@
     }
 
     function setNineSquares(newSquares) {
-      // start
-      // end
+      const gameBoard = document.querySelector('.game-table');
+
+      while (gameBoard.firstChild) {
+        gameBoard.removeChild(gameBoard.firstChild);
+      }
+
+      for (let i = 0; i < newSquares.length; i++) {
+        let cell = document.createElement('div');
+        cell.id = 'square-' + i;
+        cell.className = 'square';
+        cell.textContent = newSquares[i] || '';
+        cell.addEventListener('click', (event) => {
+          handleClick(i, event);
+        });
+        gameBoard.appendChild(cell);
+      }
     }
 
     function setCurrentPlayer(player) {
@@ -156,12 +170,9 @@
         return;
       }
 
-      console.log(`Clicked on ${index} Box after first condition check`);
-
       squares = squares.slice();
       squares[index] = currentPlayer;
-
-      console.log(`Clicked on ${index} Box after 2nd condition check`);
+      setNineSquares(squares);
 
       const winner = calculateWinner();
       if (winner !== null) {
@@ -175,10 +186,7 @@
         player: currentPlayer,
       }]);
 
-      console.log(squares);
-      console.log(history);
-      console.log(gameover);
-
+      console.log(setNineSquares(squares));
     }
 
     function handleReset() {
