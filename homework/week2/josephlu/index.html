@@ -128,8 +128,9 @@
       const li = document.createElement('li')
       li.textContent = `玩家: ${item.player}, index: ${item.idx}`
       h.push(li)
+      console.log(`setHistoryList, idx: ${item.idx}, player: ${item.player}`)
     })
-  
+
     for (let i = 0; i < history.length; i++) {
       historyList.appendChild(h[i]);
     }
@@ -162,28 +163,20 @@
     let winner = null;
     // start
     if (squares[0]?.player === squares[1]?.player && squares[0]?.player === squares[2]?.player) {
-      console.log("橫上")
       winner = squares[0]?.player ? squares[0]?.player : null;
     } else if (squares[3]?.player === squares[4]?.player && squares[3]?.player === squares[5]?.player) {
-      console.log("橫中")
       winner = squares[3]?.player ? squares[3]?.player : null;
     } else if (squares[6]?.player === squares[7]?.player && squares[6]?.player === squares[8]?.player) {
-      console.log("橫下")
       winner = squares[6]?.player ? squares[6]?.player : null;
     } else if (squares[0]?.player === squares[3]?.player && squares[0]?.player === squares[6]?.player) {
-      console.log("直左")
       winner = squares[0]?.player ? squares[0]?.player : null;
     } else if (squares[1]?.player === squares[4]?.player && squares[1]?.player === squares[7]?.player) {
-      console.log("直中")
       winner = squares[1]?.player ? squares[1]?.player : null;
     } else if (squares[2]?.player === squares[5]?.player && squares[2]?.player === squares[8]?.player) {
-      console.log("直右")
       winner = squares[2]?.player ? squares[2]?.player : null;
     } else if (squares[0]?.player === squares[4]?.player && squares[0]?.player === squares[8]?.player) {
-      console.log("左上右下斜")
       winner = squares[0]?.player ? squares[0]?.player : null;
     } else if (squares[2]?.player === squares[4]?.player && squares[2]?.player === squares[6]?.player) {
-      console.log("右上左下斜")
       winner = squares[2]?.player ? squares[2]?.player : null;
     }
     console.log(`winner: ${winner}`)
@@ -202,7 +195,6 @@
       window.alert("不能重複點擊");
       return
     }
-
 
     console.log(`SquaresLength: ${squares.length}, squares: ${JSON.stringify(squares)}`);
     console.log(`Square ${index} clicked!`);
