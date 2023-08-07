@@ -61,14 +61,6 @@
             </li>
           </ul>
         </li>
-
-        <li>
-          <strong>TODO</strong>
-          <ul>
-            <li>點太多框框格式會跑掉</li>
-            <li>OX的css</li>
-          </ul>
-        </li>
       </ul>
       
     </block>
@@ -193,10 +185,11 @@
           return;
         }
         cell.textContent = currentPlayer;
-
-        const indexN = index.substring(7); // 第幾個square
+        cell.style.fontSize = '30px';
+        //置中語法參考：https://ithelp.ithome.com.tw/articles/10277454?sc=hot 第一個
+                
         // 每次點擊 -> 修改squares內容、新增到頁面上、讓history加一筆、跳一次CurrentPlayer、計算遊戲有沒有結束
-        setNineSquares(indexN);
+        setNineSquares(index.substring(7));
         setHistoryList(index);
         setCurrentPlayer(history.length);
         calculateWinner();
@@ -209,7 +202,6 @@
       history = [];
       currentPlayer = players[0];
       setCurrentPlayer(currentPlayer);
-      console.log(currentPlayer);
       gameover = false;
       cells = document.querySelectorAll('div.square').forEach((cell) => {
         cell.textContent = null;
@@ -258,8 +250,9 @@
     }
     .game-board{
         display: grid;
-        grid-template-columns: 33% 33% 33%;
-        grid-template-rows: 33% 33% 33%;
+        grid-template-columns: 50px 50px 50px;
+        grid-template-rows: 50px 50px 50px;
+        padding-right: 10px;
     }
     .square{
         display: flex;
@@ -268,6 +261,9 @@
         width: 50px;
         height: 50px;
         cursor: pointer;
+        
+        justify-content: center;  
+        align-items: center;        
     }
     /* end */
   </style>
