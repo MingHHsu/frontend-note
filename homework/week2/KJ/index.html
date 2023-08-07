@@ -139,8 +139,33 @@
     }
 
     function handleClick(index, event) {
-      // start
-      // end
+
+      if (squares[index] || gameover === true) {
+        return;
+      }
+
+      console.log(`Clicked on ${index} Box after first condition check`);
+
+      squares = squares.slice();
+      squares[index] = currentPlayer;
+
+      console.log(`Clicked on ${index} Box after 2nd condition check`);
+
+      const winner = calculateWinner();
+      if (winner !== null) {
+        gameover = true;
+      }
+
+      currentPlayer = players[(history.length + 1) % 2];
+
+      history = history.concat([{
+        squares: squares,
+        player: currentPlayer,
+      }]);
+
+      console.log(squares);
+      console.log(history);
+
     }
 
     function handleReset() {
@@ -165,8 +190,8 @@
           let cell = document.createElement('div');
           cell.id = 'square-' + i;
           cell.className = 'square';
-          cell.addEventListener('click', () => {
-            console.log('按了第', i, '格');
+          cell.addEventListener('click', (event) => {
+            handleClick(i, event);
           });
           div.appendChild(cell);
       }
@@ -177,8 +202,4 @@
 main();
 
   </script>
-  <style>
-    /* start */
-    /* end */
-  </style>
 </html>
