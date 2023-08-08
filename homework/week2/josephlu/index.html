@@ -116,33 +116,23 @@
   }
 
   function setHistoryList(history) {
-
     // start
     const historyList = document.getElementById(`history-list`)
     historyList.innerHTML = ''
-    let h = []
     history.forEach((item) => {
-      if (item === null) {
-        return
-      }
-      const li = document.createElement('li')
-      li.textContent = `玩家: ${item.player}, index: ${item.idx}`
-      h.push(li)
+      historyList.appendChild(createElement('li', {}, `玩家: ${item.player}, index: ${item.idx}`));
       console.log(`setHistoryList, idx: ${item.idx}, player: ${item.player}`)
     })
-
-    for (let i = 0; i < history.length; i++) {
-      historyList.appendChild(h[i]);
-    }
 
     // end
   }
 
-  function setNineSquares(squares) {
-
+  function setNineSquares(newSquares) {
     // start
-    squares.forEach((square) => {
+    squares = newSquares
+    squares.forEach((square, index) => {
       if (square === null) {
+        document.getElementById(`square-${index}`).innerText = null;
         return
       }
       console.log(`setNineSquares, idx: ${square.idx}, player: ${square.player}`)
@@ -162,22 +152,39 @@
   function calculateWinner(squares) {
     let winner = null;
     // start
-    if (squares[0]?.player === squares[1]?.player && squares[0]?.player === squares[2]?.player) {
-      winner = squares[0]?.player ? squares[0]?.player : null;
-    } else if (squares[3]?.player === squares[4]?.player && squares[3]?.player === squares[5]?.player) {
-      winner = squares[3]?.player ? squares[3]?.player : null;
-    } else if (squares[6]?.player === squares[7]?.player && squares[6]?.player === squares[8]?.player) {
-      winner = squares[6]?.player ? squares[6]?.player : null;
-    } else if (squares[0]?.player === squares[3]?.player && squares[0]?.player === squares[6]?.player) {
-      winner = squares[0]?.player ? squares[0]?.player : null;
-    } else if (squares[1]?.player === squares[4]?.player && squares[1]?.player === squares[7]?.player) {
-      winner = squares[1]?.player ? squares[1]?.player : null;
-    } else if (squares[2]?.player === squares[5]?.player && squares[2]?.player === squares[8]?.player) {
-      winner = squares[2]?.player ? squares[2]?.player : null;
-    } else if (squares[0]?.player === squares[4]?.player && squares[0]?.player === squares[8]?.player) {
-      winner = squares[0]?.player ? squares[0]?.player : null;
-    } else if (squares[2]?.player === squares[4]?.player && squares[2]?.player === squares[6]?.player) {
-      winner = squares[2]?.player ? squares[2]?.player : null;
+    // if (squares[0]?.player === squares[1]?.player && squares[0]?.player === squares[2]?.player) {
+    //   winner = squares[0]?.player ? squares[0]?.player : null;
+    // } else if (squares[3]?.player === squares[4]?.player && squares[3]?.player === squares[5]?.player) {
+    //   winner = squares[3]?.player ? squares[3]?.player : null;
+    // } else if (squares[6]?.player === squares[7]?.player && squares[6]?.player === squares[8]?.player) {
+    //   winner = squares[6]?.player ? squares[6]?.player : null;
+    // } else if (squares[0]?.player === squares[3]?.player && squares[0]?.player === squares[6]?.player) {
+    //   winner = squares[0]?.player ? squares[0]?.player : null;
+    // } else if (squares[1]?.player === squares[4]?.player && squares[1]?.player === squares[7]?.player) {
+    //   winner = squares[1]?.player ? squares[1]?.player : null;
+    // } else if (squares[2]?.player === squares[5]?.player && squares[2]?.player === squares[8]?.player) {
+    //   winner = squares[2]?.player ? squares[2]?.player : null;
+    // } else if (squares[0]?.player === squares[4]?.player && squares[0]?.player === squares[8]?.player) {
+    //   winner = squares[0]?.player ? squares[0]?.player : null;
+    // } else if (squares[2]?.player === squares[4]?.player && squares[2]?.player === squares[6]?.player) {
+    //   winner = squares[2]?.player ? squares[2]?.player : null;
+    // }
+
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ]
+
+    for (const [a, b, c] of winConditions) {
+      if (squares[a] && squares[a]?.player === squares[b]?.player && squares[a]?.player === squares[c]?.player) {
+        winner = squares[a]?.player ? squares[2]?.player : null;
+      }
     }
     console.log(`winner: ${winner}`)
 
@@ -203,7 +210,7 @@
     const winner = calculateWinner(squares)
     if (winner != null) {
       gameover = true;
-    } else if (winner == null && squares.filter((square) => square === null).length === 0) {
+    } else if (winner == null && history.length === 9) {
       gameover = true;
     }
 
@@ -232,16 +239,17 @@
   function handleReset() {
     // start
     // 重設squares
-    squares.forEach((square) => {
-      if (square === null) {
-        return
-      }
-      document.getElementById(`square-${square.idx}`).innerText = '';
-    });
+    // squares.forEach((square) => {
+    //   if (square === null) {
+    //     return
+    //   }
+    //   document.getElementById(`square-${square.idx}`).innerText = '';
+    // });
     squares = [null, null, null, null, null, null, null, null, null];
+    setNineSquares(squares)
     // 重設history
-    document.getElementById(`history-list`).innerHTML = '';
     history = [];
+    setHistoryList(history)
     // 重設gameover
     gameover = false
     // 重設currentPlayer
@@ -257,21 +265,15 @@
       class: 'game',
     },
       createElement('div', { class: 'game-board', style: 'grid' },
-        createElement('div', { id: 'square-0', className: 'square', onClick: () => handleClick(0) }),
-        createElement('div', { id: 'square-1', className: 'square', onClick: () => handleClick(1) }),
-        createElement('div', { id: 'square-2', className: 'square', onClick: () => handleClick(2) }),
-        createElement('div', { id: 'square-3', className: 'square', onClick: () => handleClick(3) }),
-        createElement('div', { id: 'square-4', className: 'square', onClick: () => handleClick(4) }),
-        createElement('div', { id: 'square-5', className: 'square', onClick: () => handleClick(5) }),
-        createElement('div', { id: 'square-6', className: 'square', onClick: () => handleClick(6) }),
-        createElement('div', { id: 'square-7', className: 'square', onClick: () => handleClick(7) }),
-        createElement('div', { id: 'square-8', className: 'square', onClick: () => handleClick(8) }),
+        ...squares.map((square, index) => {
+          return createElement('div', { id: `square-${index}`, className: 'square', onClick: () => handleClick(index, event) })
+        })
       ),
       createElement('div', { className: 'game-info' },
         createElement('div', { id: 'current-player' }, 'Current Player: O'),
         createElement('ul', { id: 'history-list' },
         ),
-        createElement('button', { onClick: () => handleReset() }, 'Reset'),
+        createElement('button', { onClick: handleReset }, 'Reset'),
       ),
       // end
     );
@@ -290,7 +292,7 @@
     display: grid;
     grid-template-columns: repeat(3, 50px);
     grid-template-rows: repeat(3, 50px);
-    border: 2px solid black;
+    border: 1px solid black;
     width: 150px;
     height: 150px;
   }
@@ -300,7 +302,7 @@
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    border: 2px solid black;
+    border: 1px solid black;
     cursor: pointer;
   }
 
