@@ -118,58 +118,101 @@
 
     function setHistoryList(newHistory) {
       // start
+      newHistory.forEach((his) => {
+        history.push({ 'index': his.index, 'player': his.player });
+        document.getElementById('history-list').appendChild(createElement('li', {}, his.player + ': ' + his.index)); //{}：設定屬性
+      });
       // end
     }
 
-    function setNineSquares(newSquares) {
+    function setNineSquares(newSquares) { //設定 squares 的值，並且呈現在相對應的格子中
       // start
+      console.log('s: ', newSquares);
+      newSquares.forEach((square) => {
+        squares[square.index] = square.player;
+        document.getElementById('square-'+square.index).innerHTML = square.player;
+      });
       // end
     }
 
     function setCurrentPlayer(player) {
       // start
+      document.getElementById('current-player').innerHTML = 'Current Player: ' + player;
+      currentPlayer = players[history.length % 2];
       // end
     }
 
-    function calculateWinner() {
+    function calculateWinner() { //https://react.dev/learn/tutorial-tic-tac-toe
       let winner = null;
 
       // start
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+          return squares[a];
+        }
+      }
       // end
 
       return winner;
     }
-
+    
     function handleClick(index, event) {
       // start
+      setCurrentPlayer(players[(history.length+1) % 2]);
+      setNineSquares([{ 'index': index, 'player': currentPlayer }]);
+      setHistoryList([{ 'index': index, 'player': currentPlayer }]);
+      console.log('click: ', index);
+      if(calculateWinner()){
+        gameover = true;
+        setTimeout(() => {
+          handleReset();
+          window.alert("Winner is " + currentPlayer);
+        }, 10);
+      }
       // end
     }
 
     function handleReset() {
       // start
+      squares = [null, null, null, null, null, null, null, null, null];
+      setNineSquares(Array.from({ length: 9 }, (_, index) => ({ index, player: '' })));
+      history = [];
+      document.getElementById('history-list').innerHTML = '';
+      setCurrentPlayer(players[0]);
+      gameover = false;
       // end
     }
 
     function main() {
       const root = document.getElementById('root');
-      /*
       const game = createElement(
         // start
-        'div', {'className':'board'}, squares.map(((value, index) => {
-          const childElement = createElement('div',{id: 'square-'+index, 'className': 'square', 'onClick': () => {console.log('click: ', index);}});
-          return childElement;
-        }))
+        'div', {'className':'game'},
+        createElement(
+          'div', {'className':'board'}, ...squares.map(((value, index) => {
+            return createElement('div',{id: 'square-'+index, 'className': 'square', 'onClick': (event) => {handleClick(index, event);}});
+          }))
+        ),
+        createElement(
+          'div', {'className':'info'},
+          createElement('div', {'className': 'margin', id:'current-player'}, 'Current Player: '+players[0]),
+          createElement('ul', {'className': 'margin', id:'history-list'}),
+          createElement('button', {'className': 'margin', 'onClick': handleReset}, 'Reset')
+        )
         // end
       );
       root.appendChild(game);
-      */
-      const element = createElement('div',{'className':'board'});
-      console.log('div');
-      squares.map(((value, index) => {
-        const childElement = createElement('div',{id: 'square-'+index, 'className': 'square', 'onClick': () => {console.log('click: ', index);}});
-        element.appendChild(childElement);
-      }))
-      root.appendChild(element);
     }
   
     main();
@@ -181,14 +224,28 @@
       display: grid;
       grid-template-columns: 50px 50px 50px;
       grid-template-rows: 50px 50px 50px;
+      gap: 2px; /*格子的間隙，加了這個讓格子粗細一樣了*/
     }
     .square{
-      display: grid; /*flex*/
+      display: grid;
       border-style: solid;
       border-width: 2px;
       width: 50px;
       height: 50px;
-      cursor: pointer;
+      cursor: pointer; /*滑鼠*/
+      justify-content: center; /*x軸*/
+      align-items: center; /*y軸*/
+      font-size: 40px;
+    }
+    .game{
+      display: flex;
+      column-gap: 20px;
+    }
+    .info{
+      margin-left: 10px;
+    }
+    .margin{
+      margin-bottom: 10px;
     }
     /* end */
   </style>
