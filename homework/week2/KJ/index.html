@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Exercise</title>
+  </head>
+  <body>
+    <block>
+      <h3>題目：<span>ＯＯＸＸ</span></h3>
+      <h3>前情提要：</h3>
+      <ul>
+        <li>所有的 code 都只寫在 start 和 end 中間</li>
+        <li>看完以下需求及註解後，就可以開始寫了</li>
+        <li>不清楚或不懂的話，請用 slack 在群組發問</li>
+      </ul>
+      <h3>請完成以下需求：</h3>
+      <ul>
+        <li>
+          <strong>HTML</strong>
+          <ul>
+            <li>在 Google Chrome 內查看 HTML 時，要長得跟附圖一樣（忽略Ｏ跟Ｘ）</li>
+          </ul>
+        </li>
+        <li>
+          <strong>CSS</strong>
+          <ul>
+            <li>九宮格線條為 2px</li>
+            <li>九宮格格子為 50px 正方形</li>
+            <li>鼠標在格子上會變“點擊”圖標</li>
+            <li>O 和 Ｘ 在格子內置中，且字體大小是 30px</li>
+          </ul>
+        </li>
+        <li>
+          <strong>JavaScript</strong>
+          <ul>
+            <li>
+              讀懂 createElement 這個 function 之後會請大家逐行解釋
+              <ul>
+                <li>"..." 這個符號叫做 spread syntax</li>
+              </ul>
+            </li>
+            <li>
+              完成 setHistoryList 這個 function 會設定 history 的值，並且呈現在 id = "history-list" 的 list 中
+            </li>
+            <li>
+              完成 setNineSquares 這個 function 會設定 squares 的值，並且呈現在相對應的格子中
+            </li>
+            <li>
+              完成 currentPlayer 這個 function 會設定 currentPlayer 的值，並且呈現在 id = "current-player" 的 element 中
+            </li>
+            <li>
+              完成 calculateWinner 這個 function 會計算有沒有 winner，並回傳 winner，如果沒有 winner 則回傳 null
+            </li>
+            <li>
+              完成 handleClick 這個 function 請參照影片結果，沒有提示，請大家自行完成
+            </li>
+            <li>
+              完成 handleReset 這個 function 會重設 gameover、history、squares、currentPlayer
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </block>
+    <div class="game-container">
+      <div id="root"></div>
+      <div id="history-list"></div>
+    </div>
+  </body>
+  <script type="application/javascript">
+    const players = ['O', 'X'];
+    // squares 是一個紀錄第幾格是哪一個 player 選的陣列
+    // 左圖為每個格子的 index
+    // 右圖的範例 squares = ['O', 'X', 'O', 'X', 'O', 'X', 'X', 'O', 'O'];
+    // 如果沒有 player 選的話就是 null
+    // -------------   -------------
+    // | 0 | 1 | 2 |   | O | X | O |
+    // -------------   -------------
+    // | 3 | 4 | 5 |   | X | O | X |
+    // -------------   -------------
+    // | 6 | 7 | 8 |   | X | O | O |
+    // -------------   -------------
+    let squares = [null, null, null, null, null, null, null, null, null];
+    // history 是紀錄每一次動作的陣列，第一個元素就是第一次的動作，依序紀錄
+    // 每一個動作都是一個 object ex: { index: 0, player: 'O' }
+    // index 就是格子的 index，player 就是 'O' 或 'X'
+    let history = [];
+    // currentPlayer 表示目前要選擇的玩家
+    let currentPlayer = players[0];
+    // gameover 是一個 boolean 值，判斷遊戲是否結束
+    let gameover = false;
+
+    function createElement(type, props, ...children) {
+      const element = document.createElement(type);
+      Object.entries(props).forEach(([key, value]) => {
+        switch (key) {
+          case 'className':
+            element.setAttribute('class', value);
+            break;
+          case 'onClick':
+            element.addEventListener('click', value);
+            break;
+          default:
+            element.setAttribute(key, value);
+            break;
+        }
+      });
+      children.forEach((child) => {
+        const childElement = typeof child === 'string'
+          ? document.createTextNode(child)
+          : child;
+        element.appendChild(childElement);
+      });
+      return element;
+    }
+
+    function setHistoryList(newHistory) {
+      const historyElement = document.getElementById('history-list');
+
+      while (historyElement.firstChild) {
+        historyElement.removeChild(historyElement.firstChild);
+      }
+
+      newHistory.forEach((historyItem, theMove) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `第 ${theMove + 1} 回合: ${historyItem.player} 被置放在第 ${historyItem.square} 格`;
+
+        historyElement.appendChild(listItem);
+      });
+    }
+
+    function setNineSquares(newSquares) {
+      const gameBoard = document.querySelector('.game-table');
+
+      while (gameBoard.firstChild) {
+        gameBoard.removeChild(gameBoard.firstChild);
+      }
+
+      for (let i = 0; i < newSquares.length; i++) {
+        let cell = document.createElement('div');
+        cell.id = 'square-' + i;
+        cell.className = 'square';
+        cell.textContent = newSquares[i] || '';
+        cell.addEventListener('click', (event) => {
+          handleClick(i, event);
+        });
+        gameBoard.appendChild(cell);
+      }
+    }
+
+    function setCurrentPlayer(player) {
+      currentPlayer = player;
+    }
+
+    function calculateWinner() {
+      const winnerComp = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      for (let i = 0; i < winnerComp.length; i++) {
+        const [a, b, c] = winnerComp[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+          return squares[a];
+        }
+      }
+      return null;
+    }
+
+    function handleClick(index, event) {
+
+      if (squares[index] || gameover === true) {
+        return;
+      }
+
+      let newSquares = [...squares];
+      newSquares[index] = currentPlayer;
+      squares = newSquares;
+
+      setNineSquares(squares);
+
+      history = [...history, {
+        squares: squares,
+        player: currentPlayer,
+        square: index
+      }];
+
+      setHistoryList(history);
+
+      currentPlayer = players[(history.length) % 2];
+      setCurrentPlayer(currentPlayer);
+
+      const winner = calculateWinner();
+      if (winner !== null) {
+        gameover = true;
+        window.alert("Ｂ嘴！" + winner + " 贏了拉！");
+      } else if (!squares.includes(null)) {
+        window.alert("人生如戲，此次平手咱兩不相欠。");
+      }
+    }
+
+    function handleReset() {
+      squares = [null, null, null, null, null, null, null, null, null];
+      history = [];
+      setCurrentPlayer(players[0]);
+      gameover = false;
+
+      setNineSquares(squares);
+      setHistoryList(history);
+
+    }
+
+    function main() {
+      const root = document.getElementById('root');
+      const game = document.createElement('div');
+      game.className = 'game'
+      const gameGrid = gridCreater(3, 3);
+      game.appendChild(gameGrid);
+      const resetBotton = createElement('button', {onClick: () => handleReset()}, 'Reset that Damn Board');
+      game.appendChild(resetBotton);
+      root.appendChild(game);
+      setNineSquares(squares);
+      setHistoryList(history);
+
+    }
+
+    function gridCreater(rows, columns) {
+      let div = document.createElement('div');
+      div.className = 'game-table';
+
+      for (let i = 0; i < rows * columns; i++) {
+          let cell = document.createElement('div');
+          cell.id = 'square-' + i;
+          cell.className = 'square';
+          cell.addEventListener('click', (event) => {
+            handleClick(i, event);
+          });
+          div.appendChild(cell);
+      }
+      return div;
+    }
+
+main();
+
+  </script>
+</html>
