@@ -71,7 +71,15 @@
         </li>
       </ul>
     </block>
-    <div id="root"></div>
+    <div class="container">
+      <div id="root"><!-- 畫面顯示在這裡 --></div>
+      <div class="history-container">
+        <h3>步數：</h3>
+        <ul id="history-list">
+          <!-- 步數顯示在這裡 -->
+        </ul>
+      </div>
+    </div>
   </body>
   <script type="application/javascript">
     const players = ["O", "X"];
@@ -98,37 +106,55 @@
 
     function createElement(type, props, ...children) {
       const element = document.createElement(type);
-      Object.entries(props).forEach(([key, value]) => {
-        switch (key) {
-          case "className":
-            element.setAttribute("class", value);
-            break;
-          case "onClick":
-            element.addEventListener("click", value);
-            break;
-          default:
-            element.setAttribute(key, value);
-            break;
-        }
-      });
-      children.forEach((child) => {
-        const childElement =
-          typeof child === "string" ? document.createTextNode(child) : child;
-        element.appendChild(childElement);
-      });
+      if (props && typeof props === "object") {
+        Object.entries(props).forEach(([key, value]) => {
+          switch (key) {
+            case "className":
+              element.setAttribute("class", value);
+              break;
+            case "onClick":
+              element.addEventListener("click", value);
+              break;
+            default:
+              element.setAttribute(key, value);
+              break;
+          }
+        });
+        children.forEach((child) => {
+          const childElement =
+            typeof child === "string" ? document.createTextNode(child) : child;
+          element.appendChild(childElement);
+        });
+      }
       return element;
     }
 
     function setHistoryList(newHistory) {
       history = newHistory;
+      const historyListElement = document.getElementById("history-list");
+
+      // 清空 historyListElement 的內容
+      historyListElement.innerHTML = "";
+
+      // 將每個歷史記錄創建為一個 li 元素，並將其添加到 historyListElement 中
+      history.forEach((record, index) => {
+        const li = createElement(
+          "li",
+          null,
+          `${record.player}：${record.index + 1}`
+        );
+        historyListElement.appendChild(li);
+      });
     }
 
     function setNineSquares(newSquares) {
       squares = newSquares;
+      main();
     }
 
     function setCurrentPlayer(player) {
       currentPlayer = player;
+      main();
     }
 
     function calculateWinner() {
@@ -146,7 +172,7 @@
       ];
 
       for (const line of lines) {
-        const line = [a, b, c];
+        const [a, b, c] = line;
         if (
           squares[a] &&
           squares[a] === squares[b] &&
@@ -160,7 +186,7 @@
         return winner;
       }
 
-      if (squares.every((squares) => squares !== null)) {
+      if (squares.every((square) => square !== null)) {
         return "draw";
       }
 
@@ -171,21 +197,118 @@
       if (gameover || squares[index]) {
         return;
       }
+      const newSquares = squares.slice();
+      newSquares[index] = currentPlayer;
+      const newHistory = history.concat({ index, player: currentPlayer });
+
+      const winner = calculateWinner();
+      if (winner) {
+        gameover = true;
+        return;
+      }
+      setCurrentPlayer(currentPlayer === players[0] ? players[1] : players[0]);
+      setNineSquares(newSquares);
+      setHistoryList(newHistory);
+      main();
     }
 
     function handleReset() {
       squares = Array(9).fill(null);
       history = [];
       currentPlayer = players[0];
+      gameover = false;
+      main();
     }
 
-    
     function main() {
       const root = document.getElementById("root");
-      const game = createElement();
-      // start
-      // end
-      root.appendChild(game);
+      const winner = calculateWinner();
+      const isDraw = winner === "draw"; // 判斷是否為平局
+      console.log(history);
+      if (winner && !isDraw && !gameover) {
+        // 顯示贏家的彈窗
+        gameover = true;
+        setTimeout(() => {
+          alert(`贏家：${winner}`);
+          gameover = false;
+        }, 0);
+        const gameResult = createElement(
+          "div",
+          { className: "game" },
+          createElement(
+            "div",
+            { className: "board" },
+            ...squares.map((value, index) =>
+              createElement("div", { className: "square" }, value || "")
+            )
+          ),
+          createElement(
+            "div",
+            { className: "info" },
+            createElement("div", null, `贏家：${winner}`),
+            createElement("button", { onClick: handleReset }, "重新開始")
+          )
+        );
+
+        root.innerHTML = ""; // 重新渲染畫面更新
+        root.appendChild(gameResult);
+      } else if (isDraw && !gameover) {
+        // 顯示平局的彈窗
+        gameover = true;
+        setTimeout(() => {
+          alert("平局");
+          gameover = false;
+        }, 0);
+        // 處理平局
+        const gameResult = createElement(
+          "div",
+          { className: "game" },
+          createElement(
+            "div",
+            { className: "board" },
+            ...squares.map((value, index) =>
+              createElement("div", { className: "square" }, value || "")
+            )
+          ),
+          createElement(
+            "div",
+            { className: "info" },
+            createElement("div", null, "平局"),
+            createElement("button", { onClick: handleReset }, "重新開始")
+          )
+        );
+
+        root.innerHTML = "";
+        root.appendChild(gameResult);
+      } else {
+        const game = createElement(
+          "div",
+          { className: "game" },
+          createElement(
+            "div",
+            { className: "board" },
+            ...squares.map((value, index) =>
+              createElement(
+                "div",
+                {
+                  className: "square",
+                  onClick: (event) => handleClick(index, event),
+                },
+                value || ""
+              )
+            )
+          ),
+          createElement(
+            "div",
+            { className: "info" },
+            createElement("div", null, `下一位玩家：${currentPlayer}`),
+            createElement("button", { onClick: handleReset }, "重新開始")
+          )
+        );
+
+        root.innerHTML = "";
+        root.appendChild(game);
+      }
     }
 
     main();
@@ -238,8 +361,14 @@
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #00b327;
     }
+    .history-container {
+      margin-left: 20px; /* 調整左側邊距 */
+      flex: 1; /* 讓 history-container 佔滿剩餘空間 */
+      color: black;
+    }
+
     /* end */
   </style>
 </html>
